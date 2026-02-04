@@ -152,34 +152,38 @@ setInterval(() => {
 document.addEventListener("DOMContentLoaded", () => {
 
   const btn = document.getElementById("screenshotBtn");
+  const target = document.getElementById("capture");
 
-  if (!btn) return;
+  if (!btn || !target) return;
 
   btn.addEventListener("click", () => {
 
-    // Hide ONLY the button
-    btn.style.opacity = "0";
+    // Hide button
+    btn.style.display = "none";
 
-    setTimeout(() => {
+    // Remove blur/filter temporarily
+    const oldFilter = target.style.filter;
+    target.style.filter = "none";
 
-      html2canvas(document.body, {
-        useCORS: true,
-        backgroundColor: null
-      }).then(canvas => {
+    html2canvas(target, {
+      useCORS: true,
+      scale: 2,
+      backgroundColor: null,
+      windowWidth: target.scrollWidth,
+      windowHeight: target.scrollHeight
+    }).then(canvas => {
 
-        const link = document.createElement("a");
+      const link = document.createElement("a");
 
-        link.download = "valentine-moment.png";
-        link.href = canvas.toDataURL("image/png");
+      link.download = "valentine-moment.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
 
-        link.click();
+      // Restore
+      btn.style.display = "block";
+      target.style.filter = oldFilter;
 
-        // Restore button
-        btn.style.opacity = "1";
-
-      });
-
-    }, 200);
+    });
 
   });
 
