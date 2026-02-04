@@ -1,102 +1,128 @@
-// Apply Config
-
-document.querySelector("h1").innerText = TITLE_TEXT;
-document.querySelectorAll("p")[0].innerText = SUB_TEXT;
-document.querySelectorAll("p")[1].innerText =
-  `${COME_BACK_TEXT} ${new Date(TARGET_DATE).toDateString()} 💖`;
-
-document.getElementById("saveBtn").innerText = SCREENSHOT_TEXT;
-
-
-// Music Settings
-
+const title = document.getElementById("title");
+const subtitle = document.getElementById("subtitle");
+const timerBox = document.getElementById("timer");
+const question = document.getElementById("question");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const btnBox = document.getElementById("btnBox");
+const gif = document.getElementById("finalGif");
 const music = document.getElementById("bgMusic");
 
-music.autoplay = MUSIC_AUTOPLAY;
-music.loop = MUSIC_LOOP;
-music.volume = MUSIC_VOLUME;
+let qIndex = 0;
 
-
-// Background
-
-document.body.style.background =
-  `radial-gradient(circle, ${BACKGROUND_START}, ${BACKGROUND_END})`;
-
-
-// Timer Style
-
-const timer = document.getElementById("timer");
-
-timer.style.background = TIMER_BG;
-timer.style.color = TIMER_TEXT_COLOR;
-timer.style.fontSize = TIMER_FONT_SIZE;
-
-
-// GIF Settings
-
-const gif = document.querySelector(".gif");
-
-gif.style.width = GIF_WIDTH;
-
-if (!GIF_VISIBLE) gif.style.display = "none";
-
-
-// Button Settings
-
-if (!SHOW_BUTTON) {
-  document.getElementById("saveBtn").style.display = "none";
+// Music
+if(CONFIG.music){
+  document.body.addEventListener("click",()=>{
+    music.play();
+  },{once:true});
 }
 
+// Date
+const today = new Date();
+const unlock = new Date(CONFIG.unlockDate);
+
+// Before Feb 7
+if(today < unlock){
+
+  title.innerHTML = "💌 Coming Soon 💌";
+  subtitle.innerHTML = "This surprise is waiting for you...";
+  question.innerHTML = "Come back on 7th February 💖";
+
+  btnBox.style.display="none";
+
+  startTimer();
+
+}else{
+
+  startValentine();
+
+}
 
 // Countdown
+function startTimer(){
 
-function updateTimer() {
+  setInterval(()=>{
 
-  if (!SHOW_TIMER) {
-    timer.style.display = "none";
-    return;
-  }
+    const diff = unlock - new Date();
 
-  const target = new Date(TARGET_DATE).getTime();
-  const now = new Date().getTime();
+    if(diff<=0) location.reload();
 
-  const diff = target - now;
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor(diff/3600000)%24;
+    const m = Math.floor(diff/60000)%60;
+    const s = Math.floor(diff/1000)%60;
 
-  if (diff <= 0) {
-    timer.innerText = READY_TEXT;
-    return;
-  }
+    timerBox.innerHTML =
+      `${d}d ${h}h ${m}m ${s}s ❤️`;
 
-  const d = Math.floor(diff / (1000*60*60*24));
-  const h = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
-  const m = Math.floor((diff % (1000*60*60))/(1000*60));
-  const s = Math.floor((diff % (1000*60))/1000);
-
-  timer.innerText = `${d} Days ${h}h ${m}m ${s}s 💗`;
+  },1000);
 }
 
-setInterval(updateTimer, 1000);
-updateTimer();
+// Valentine Logic
+function startValentine(){
 
+  const day = today.getDate();
+  const data = CONFIG.week[day];
+
+  title.innerHTML = data ? data.name : "My Valentine 💖";
+  subtitle.innerHTML = CONFIG.loverName;
+
+  showQuestion();
+}
+
+// Questions
+function showQuestion(){
+
+  const q = CONFIG.questions[qIndex];
+
+  question.innerHTML = q.q;
+  yesBtn.innerHTML = q.yes;
+  noBtn.innerHTML = q.no;
+
+}
+
+yesBtn.onclick = ()=>{
+
+  qIndex++;
+
+  if(qIndex < CONFIG.questions.length){
+    showQuestion();
+  }else{
+    finish();
+  }
+};
+
+noBtn.onclick = ()=>{
+  noBtn.style.position="absolute";
+  noBtn.style.left = Math.random()*80+"%";
+  noBtn.style.top = Math.random()*80+"%";
+};
+
+// Finish
+function finish(){
+
+  question.innerHTML="Yayyy 💖 You Are My Valentine 😘";
+  btnBox.style.display="none";
+  timerBox.style.display="none";
+
+  gif.hidden=false;
+}
 
 // Screenshot
+function takeScreenshot(){
 
-function takeScreenshot() {
+  const btn = document.getElementById("shotBtn");
+  btn.style.display="none";
 
-  if (!ENABLE_SCREENSHOT) return;
+  html2canvas(document.getElementById("capture"))
+  .then(canvas=>{
 
-  const box = document.getElementById("capture");
-  const btn = document.getElementById("saveBtn");
-
-  btn.style.visibility = "hidden";
-
-  html2canvas(box).then(canvas => {
-
-    const link = document.createElement("a");
-    link.download = SCREENSHOT_FILE_NAME;
-    link.href = canvas.toDataURL();
+    const link=document.createElement("a");
+    link.download="valentine.png";
+    link.href=canvas.toDataURL();
     link.click();
 
-    btn.style.visibility = "visible";
+    btn.style.display="block";
+
   });
 }
