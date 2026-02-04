@@ -1,128 +1,149 @@
+// Valentine Week Start Date (7 Feb)
+const startDate = new Date("2026-02-07T00:00:00");
+
+const comingSoon = document.getElementById("comingSoon");
+const mainContent = document.getElementById("mainContent");
+const countdown = document.getElementById("countdown");
+
+function checkDate() {
+  const now = new Date();
+
+  if (now < startDate) {
+    // Show Coming Soon
+    comingSoon.style.display = "block";
+    mainContent.hidden = true;
+
+    startCountdown();
+
+  } else {
+    // Show Main Website
+    comingSoon.style.display = "none";
+    mainContent.hidden = false;
+  }
+}
+
+function startCountdown() {
+
+  setInterval(() => {
+
+    const now = new Date();
+    const diff = startDate - now;
+
+    if (diff <= 0) {
+      location.reload();
+      return;
+    }
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const mins = Math.floor((diff / (1000*60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+
+    countdown.innerHTML =
+      `${days} Days ${hours}h ${mins}m ${secs}s 💗`;
+
+  }, 1000);
+}
+
+checkDate();
+
 const title = document.getElementById("title");
-const subtitle = document.getElementById("subtitle");
-const timerBox = document.getElementById("timer");
 const question = document.getElementById("question");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
-const btnBox = document.getElementById("btnBox");
-const gif = document.getElementById("finalGif");
-const music = document.getElementById("bgMusic");
+const finalGif = document.getElementById("finalGif");
 
-let qIndex = 0;
+const music = document.getElementById("bgMusic");
+const screenshotText = document.getElementById("screenshotText");
+
+
+// Get Today
+function getToday(){
+
+  const d = new Date();
+  const m = String(d.getMonth()+1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
+
+  return `${m}-${day}`;
+}
+
+
+const today = getToday();
+
+const DAY = CONFIG.week[today] || CONFIG.week["02-14"];
+
+
+// Init
+title.innerText = `Hey ${CONFIG.name} ${DAY.emoji}`;
+question.innerText = DAY.title;
+yesBtn.innerText = "Continue 💖";
+
 
 // Music
-if(CONFIG.music){
-  document.body.addEventListener("click",()=>{
-    music.play();
-  },{once:true});
-}
-
-// Date
-const today = new Date();
-const unlock = new Date(CONFIG.unlockDate);
-
-// Before Feb 7
-if(today < unlock){
-
-  title.innerHTML = "💌 Coming Soon 💌";
-  subtitle.innerHTML = "This surprise is waiting for you...";
-  question.innerHTML = "Come back on 7th February 💖";
-
-  btnBox.style.display="none";
-
-  startTimer();
-
-}else{
-
-  startValentine();
-
-}
-
-// Countdown
-function startTimer(){
-
-  setInterval(()=>{
-
-    const diff = unlock - new Date();
-
-    if(diff<=0) location.reload();
-
-    const d = Math.floor(diff/86400000);
-    const h = Math.floor(diff/3600000)%24;
-    const m = Math.floor(diff/60000)%60;
-    const s = Math.floor(diff/1000)%60;
-
-    timerBox.innerHTML =
-      `${d}d ${h}h ${m}m ${s}s ❤️`;
-
-  },1000);
-}
-
-// Valentine Logic
-function startValentine(){
-
-  const day = today.getDate();
-  const data = CONFIG.week[day];
-
-  title.innerHTML = data ? data.name : "My Valentine 💖";
-  subtitle.innerHTML = CONFIG.loverName;
-
-  showQuestion();
-}
-
-// Questions
-function showQuestion(){
-
-  const q = CONFIG.questions[qIndex];
-
-  question.innerHTML = q.q;
-  yesBtn.innerHTML = q.yes;
-  noBtn.innerHTML = q.no;
-
-}
-
 yesBtn.onclick = ()=>{
 
-  qIndex++;
+  if(music.paused) music.play().catch(()=>{});
 
-  if(qIndex < CONFIG.questions.length){
-    showQuestion();
-  }else{
-    finish();
-  }
+  finish();
 };
 
-noBtn.onclick = ()=>{
-  noBtn.style.position="absolute";
-  noBtn.style.left = Math.random()*80+"%";
-  noBtn.style.top = Math.random()*80+"%";
+
+// No Run
+noBtn.onmouseover = ()=>{
+  noBtn.style.transform =
+  `translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
 };
+
 
 // Finish
 function finish(){
 
-  question.innerHTML="Yayyy 💖 You Are My Valentine 😘";
-  btnBox.style.display="none";
-  timerBox.style.display="none";
+  question.innerText = DAY.final;
 
-  gif.hidden=false;
+  yesBtn.style.display="none";
+  noBtn.style.display="none";
+
+  finalGif.hidden=false;
+  screenshotText.style.display="block";
+
+  startSymbols();
 }
 
-// Screenshot
-function takeScreenshot(){
 
-  const btn = document.getElementById("shotBtn");
-  btn.style.display="none";
+// Day Animation
+function startSymbols(){
 
-  html2canvas(document.getElementById("capture"))
-  .then(canvas=>{
+  setInterval(()=>{
 
-    const link=document.createElement("a");
-    link.download="valentine.png";
-    link.href=canvas.toDataURL();
-    link.click();
+    const el = document.createElement("div");
 
-    btn.style.display="block";
+    el.className="symbol";
+    el.innerText = DAY.symbol;
 
-  });
+    el.style.left = Math.random()*100+"vw";
+    el.style.animationDuration =
+      Math.random()*3+4+"s";
+
+    document.body.appendChild(el);
+
+    setTimeout(()=>el.remove(),7000);
+
+  },300);
 }
+// Floating hearts
+setInterval(() => {
+
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+
+}, 500);
