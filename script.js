@@ -147,3 +147,36 @@ setInterval(() => {
   }, 6000);
 
 }, 500);
+
+// Screenshot Button Logic
+const screenshotBtn = document.getElementById("screenshotBtn");
+
+if (screenshotBtn) {
+
+  screenshotBtn.addEventListener("click", () => {
+
+    // Hide button before capture
+    screenshotBtn.style.display = "none";
+
+    setTimeout(() => {
+
+      html2canvas(document.body).then(canvas => {
+
+        const link = document.createElement("a");
+
+        link.download = "my_valentine_moment.png";
+        link.href = canvas.toDataURL();
+
+        link.click();
+
+        // Show button again
+        screenshotBtn.style.display = "inline-block";
+
+      });
+
+    }, 300);
+
+  });
+
+}
+
