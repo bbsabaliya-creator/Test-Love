@@ -1,134 +1,74 @@
-html, body {
-  width: 100%;
-  height: 100%;
+* {
   margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
-.container {
-  min-height: 100vh;
-}
-/* ADD THIS */
-.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-/* Floating Symbols */
-.symbol {
-  position: fixed;
-  font-size: 30px;
-  animation: fall linear infinite;
-  pointer-events: none;
-}
-
-@keyframes fall {
-  from {
-    transform: translateY(-10vh);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(110vh);
-    opacity: 0;
-  }
-}
-/* Romantic Background */
 body {
-  background: radial-gradient(circle at top,
-    #ff4b7d,
-    #c9184a,
-    #590d22);
-  min-height: 100vh;
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
+  height: 100vh;
+  background: radial-gradient(circle, #ff4b7d, #b3003c);
   display: flex;
-  align-items: center;
   justify-content: center;
-  overflow: hidden;
+  align-items: center;
+  flex-direction: column;
 }
 
-/* Coming Soon Screen */
-.coming-soon {
-  text-align: center;
+/* Card */
 
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-
-  padding: 50px 40px;
+.card {
+  width: 400px;
+  padding: 35px;
+  background: rgba(255,255,255,0.15);
   border-radius: 25px;
-
-  box-shadow:
-    0 0 30px rgba(255, 105, 180, 0.4),
-    0 0 60px rgba(255, 20, 147, 0.2);
-
-  color: #fff;
-
-  animation: fadeZoom 2s ease;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  color: white;
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
 }
 
-.coming-soon h1 {
-  font-size: 2.6rem;
-  color: #ffd6e0;
-  text-shadow: 0 0 10px #ff4d6d;
+.card h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
 }
 
-
-.coming-soon p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  text-shadow: 0 0 5px rgba(255,255,255,0.3);
+.card p {
+  margin: 10px 0;
+  font-size: 16px;
 }
 
+/* Timer */
 
-.timer {
-  margin-top: 20px;
-  font-size: 1.4rem;
-  font-weight: bold;
-
-  color: #fff;
-
-  text-shadow:
-    0 0 5px #fff,
-    0 0 15px #ff4d6d,
-    0 0 30px #ff85a1;
-
-  background: rgba(0,0,0,0.25);
-  padding: 8px 16px;
-  border-radius: 12px;
+#timer {
+  margin-top: 15px;
+  background: rgba(0,0,0,0.3);
+  padding: 10px 20px;
+  border-radius: 20px;
   display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-@keyframes fadeZoom {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-.heart {
-  position: absolute;
-  font-size: 20px;
-  animation: float 6s linear infinite;
-  opacity: 0.7;
+/* GIF */
+
+.gif {
+  width: 150px;
+  margin-top: 20px;
 }
 
-@keyframes float {
-  from {
-    transform: translateY(100vh);
-  }
-  to {
-    transform: translateY(-10vh);
-  }
-}
-#screenshotBtn {
+/* Button */
+
+#saveBtn {
+  margin-top: 25px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: #d10047;
+  font-size: 14px;
   cursor: pointer;
-  z-index: 9999;
-  position: relative;
-  transition: opacity 0.2s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
-#screenshotBtn:hover {
+#saveBtn:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(255,77,109,0.6);
 }
