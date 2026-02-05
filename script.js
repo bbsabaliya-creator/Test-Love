@@ -7,41 +7,29 @@ const countdown = document.getElementById("countdown");
 
 function checkDate() {
   const now = new Date();
-
   if (now < startDate) {
-    // Show Coming Soon
     comingSoon.style.display = "block";
     mainContent.hidden = true;
-
     startCountdown();
-
   } else {
-    // Show Main Website
     comingSoon.style.display = "none";
     mainContent.hidden = false;
   }
 }
 
 function startCountdown() {
-
   setInterval(() => {
-
     const now = new Date();
     const diff = startDate - now;
-
     if (diff <= 0) {
       location.reload();
       return;
     }
-
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff / (1000*60*60)) % 24);
-    const mins = Math.floor((diff / (1000*60)) % 60);
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const mins = Math.floor((diff / (1000 * 60)) % 60);
     const secs = Math.floor((diff / 1000) % 60);
-
-    countdown.innerHTML =
-      `${days} Days ${hours}h ${mins}m ${secs}s 💗`;
-
+    countdown.innerHTML = `${days} Days ${hours}h ${mins}m ${secs}s 💗`;
   }, 1000);
 }
 
@@ -52,26 +40,18 @@ const question = document.getElementById("question");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const finalGif = document.getElementById("finalGif");
-
 const music = document.getElementById("bgMusic");
 const screenshotText = document.getElementById("screenshotText");
 
-
-// Get Today
-function getToday(){
-
+function getToday() {
   const d = new Date();
-  const m = String(d.getMonth()+1).padStart(2,"0");
-  const day = String(d.getDate()).padStart(2,"0");
-
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
   return `${m}-${day}`;
 }
 
-
 const today = getToday();
-
 const DAY = CONFIG.week[today] || CONFIG.week["02-14"];
-
 
 // Init
 title.innerText = `Hey ${CONFIG.name} ${DAY.emoji}`;
@@ -80,134 +60,82 @@ question.innerHTML = `
   <div style="margin-top:10px;font-size:1.1rem;">
     ${DAY.question}
   </div>
-`;
+`; // FIXED: Closed backtick and moved semicolon
+
 yesBtn.innerText = "Continue 💖";
 
-
-// Music
-yesBtn.onclick = ()=>{
-
-  if(music.paused) music.play().catch(()=>{});
-
+yesBtn.onclick = () => {
+  if (music.paused) music.play().catch(() => {});
   finish();
 };
 
-
-// No Run
-noBtn.onmouseover = ()=>{
-  noBtn.style.transform =
-  `translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
+noBtn.onmouseover = () => {
+  noBtn.style.transform = `translate(${Math.random() * 200 - 100}px,${Math.random() * 200 - 100}px)`;
 };
-// No Click Message 😄💖
+
 noBtn.onclick = () => {
-  alert("Heyyy 😝💖 No is not allowed my Loveedubby  ❤️");
+  alert("Heyyy 😝💖 No is not allowed my Loveedubby ❤️");
 };
 
-// Finish
-function finish(){
+function finish() {
+  question.innerText = DAY.final;
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+  if (today === "02-14") {
+    finalGif.hidden = false;
+  }
+  screenshotText.style.display = "block";
+  startSymbols();
+  if (today === "02-14") {
+    startConfetti();
+    startFireworks();
+  }
+} // FIXED: Added missing closing brace
 
-question.innerText = DAY.final;
-
-  yesBtn.style.display="none";
-  noBtn.style.display="none";
-
-  // Show GIF only on Valentine Day
-if (today === "02-14") {
-  finalGif.hidden = false;
-}
-  screenshotText.style.display="block";
-
- startSymbols();
-
-if (today === "02-14") {
-  startConfetti();
-  startFireworks();
-}
-}
-
-// Day Animation
-function startSymbols(){
-
-  setInterval(()=>{
-
+function startSymbols() {
+  setInterval(() => {
     const el = document.createElement("div");
-
-    el.className="symbol";
+    el.className = "symbol";
     el.innerText = DAY.symbol;
-
-    el.style.left = Math.random()*100+"vw";
-    el.style.animationDuration =
-      Math.random()*3+4+"s";
-
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.animationDuration = Math.random() * 3 + 4 + "s";
     document.body.appendChild(el);
-
-    setTimeout(()=>el.remove(),7000);
-
-  },300);
+    setTimeout(() => el.remove(), 7000);
+  }, 300);
 }
+
 // Floating hearts
 setInterval(() => {
-
   const heart = document.createElement("div");
   heart.className = "heart";
   heart.innerHTML = "💖";
-
   heart.style.left = Math.random() * 100 + "vw";
   heart.style.fontSize = (15 + Math.random() * 20) + "px";
-
   document.body.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 6000);
-
+  setTimeout(() => heart.remove(), 6000);
 }, 500);
-/* Confetti Effect */
+
 function startConfetti() {
-
   const colors = ["#ff4d6d", "#ffd166", "#06d6a0", "#118ab2", "#ef476f"];
-
   setInterval(() => {
-
     const confetti = document.createElement("div");
     confetti.className = "confetti";
-
     confetti.style.left = Math.random() * 100 + "vw";
-    confetti.style.background =
-      colors[Math.floor(Math.random() * colors.length)];
-
-    confetti.style.animationDuration =
-      Math.random() * 3 + 3 + "s";
-
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDuration = Math.random() * 3 + 3 + "s";
     document.body.appendChild(confetti);
-
-    setTimeout(() => {
-      confetti.remove();
-    }, 6000);
-
+    setTimeout(() => confetti.remove(), 6000);
   }, 150);
 }
 
-
-/* Fireworks Effect */
 function startFireworks() {
-
   setInterval(() => {
-
     const firework = document.createElement("div");
     firework.className = "firework";
-
     firework.style.left = Math.random() * 80 + 10 + "vw";
     firework.style.top = Math.random() * 50 + 10 + "vh";
-
-    firework.style.background =
-      `hsl(${Math.random() * 360},100%,60%)`;
-
+    firework.style.background = `hsl(${Math.random() * 360},100%,60%)`;
     document.body.appendChild(firework);
-
-    setTimeout(() => {
-      firework.remove();
-    }, 1500);
-
+    setTimeout(() => firework.remove(), 1500);
   }, 1200);
 }
