@@ -80,7 +80,7 @@ question.innerHTML = `
   <div style="margin-top:10px;font-size:1.1rem;">
     ${DAY.question}
   </div>
-';
+`;
 yesBtn.innerText = "Continue 💖";
 
 
@@ -123,7 +123,7 @@ if (today === "02-14") {
   startConfetti();
   startFireworks();
 }
-
+}
 
 // Day Animation
 function startSymbols(){
