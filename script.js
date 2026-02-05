@@ -1,5 +1,5 @@
 // Valentine Week Start Date (7 Feb)
-const startDate = new Date("2026-02-06T00:00:00");
+const startDate = new Date("2026-02-07T00:00:00");
 
 const comingSoon = document.getElementById("comingSoon");
 const mainContent = document.getElementById("mainContent");
@@ -70,7 +70,7 @@ function getToday(){
 
 const today = getToday();
 
-const DAY = CONFIG.week[today] || CONFIG.week["02-13"];
+const DAY = CONFIG.week[today] || CONFIG.week["02-14"];
 
 
 // Init
@@ -112,14 +112,14 @@ question.innerText = DAY.final;
   noBtn.style.display="none";
 
   // Show GIF only on Valentine Day
-if (today === "02-13") {
+if (today === "02-14") {
   finalGif.hidden = false;
 }
   screenshotText.style.display="block";
 
  startSymbols();
 
-if (today === "02-13") {
+if (today === "02-14") {
   startConfetti();
   startFireworks();
 }
