@@ -1,5 +1,5 @@
 // Valentine Week Start Date (7 Feb)
-const startDate = new Date("2026-01-01T00:00:00");
+const startDate = new Date("2026-02-07T00:00:00");
 
 const comingSoon = document.getElementById("comingSoon");
 const mainContent = document.getElementById("mainContent");
