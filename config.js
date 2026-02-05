@@ -18,7 +18,7 @@ Bhargav 💍💘
 
   week: {
 
-    "02-07": {
+    "02-06": {
         name: "Rose Day 🌹",
         emoji: "🌹",
         symbol: "🌹",
@@ -27,7 +27,7 @@ Bhargav 💍💘
         final: "My love blooms for you 🌹💖"
     },
 
-    "02-08": {
+    "02-07": {
         name: "Propose Day 💍",
         emoji: "💍",
         symbol: "💍",
