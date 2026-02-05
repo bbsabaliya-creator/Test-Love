@@ -98,7 +98,7 @@ noBtn.onmouseover = ()=>{
 // Finish
 function finish(){
 
-  question.innerText = DAY.final;
+question.innerText = DAY.final;
 
   yesBtn.style.display="none";
   noBtn.style.display="none";
@@ -107,6 +107,8 @@ function finish(){
   screenshotText.style.display="block";
 
   startSymbols();
+  startConfetti();
+  startFireworks();;
 }
 
 
@@ -147,3 +149,52 @@ setInterval(() => {
   }, 6000);
 
 }, 500);
+/* Confetti Effect */
+function startConfetti() {
+
+  const colors = ["#ff4d6d", "#ffd166", "#06d6a0", "#118ab2", "#ef476f"];
+
+  setInterval(() => {
+
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.background =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    confetti.style.animationDuration =
+      Math.random() * 3 + 3 + "s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(() => {
+      confetti.remove();
+    }, 6000);
+
+  }, 150);
+}
+
+
+/* Fireworks Effect */
+function startFireworks() {
+
+  setInterval(() => {
+
+    const firework = document.createElement("div");
+    firework.className = "firework";
+
+    firework.style.left = Math.random() * 80 + 10 + "vw";
+    firework.style.top = Math.random() * 50 + 10 + "vh";
+
+    firework.style.background =
+      `hsl(${Math.random() * 360},100%,60%)`;
+
+    document.body.appendChild(firework);
+
+    setTimeout(() => {
+      firework.remove();
+    }, 1500);
+
+  }, 1200);
+}
