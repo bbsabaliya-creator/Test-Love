@@ -18,7 +18,7 @@ Bhargav 💍💘
 
   week: {
 
-    "02-06": {
+    "02-07": {
         name: "Rose Day 🌹",
         emoji: "🌹",
         symbol: "🌹",
@@ -27,7 +27,7 @@ Bhargav 💍💘
         final: "My love blooms for you 🌹💖"
     },
 
-    "02-07": {
+    "02-08": {
         name: "Propose Day 💍",
         emoji: "💍",
         symbol: "💍",
@@ -36,7 +36,7 @@ Bhargav 💍💘
         final: "You are my forever 💍💖"
     },
 
-    "02-08": {
+    "02-09": {
       name: "Chocolate Day 🍫",
       emoji: "🍫",
       symbol: "🍫",
@@ -45,7 +45,7 @@ Bhargav 💍💘
       final: "You are sweeter than chocolate 🍫💖"
     },
 
-    "02-09": {
+    "02-10": {
       name: "Teddy Day 🧸",
       emoji: "🧸",
       symbol: "🧸",
@@ -54,7 +54,7 @@ Bhargav 💍💘
       final: "You are my favorite teddy 🧸💘"
     },
 
-    "02-10": {
+    "02-11": {
       name: "Promise Day 🤞",
       emoji: "⭐",
       symbol: "⭐",
@@ -63,7 +63,7 @@ Bhargav 💍💘
       final: "I promise you my forever 🤞💖"
     },
 
-    "02-11": {
+    "02-12": {
       name: "Hug Day 🤗",
       emoji: "🤗",
       symbol: "💞",
@@ -72,7 +72,7 @@ Bhargav 💍💘
       final: "My arms are your home 🤗❤️"
     },
 
-    "02-12": {
+    "02-13": {
       name: "Kiss Day 😘",
       emoji: "💋",
       symbol: "💋",
@@ -81,7 +81,7 @@ Bhargav 💍💘
       final: "Your kisses are my addiction 😘💖"
     },
 
-    "02-13": {
+    "02-14": {
       name: "Valentine Day ❤️",
       emoji: "❤️",
       symbol: "❤️",
