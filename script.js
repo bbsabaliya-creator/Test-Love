@@ -1,5 +1,5 @@
 // Valentine Week Start Date (7 Feb)
-const startDate = new Date("2026-02-04T00:00:00");
+const startDate = new Date("2026-01-30T00:00:00");
 
 const comingSoon = document.getElementById("comingSoon");
 const mainContent = document.getElementById("mainContent");
@@ -51,7 +51,7 @@ function getToday() {
 }
 
 const today = getToday();
-const DAY = CONFIG.week[today] || CONFIG.week["02-13"];
+const DAY = CONFIG.week[today] || CONFIG.week["02-05"];
 
 // Init
 title.innerText = `Hey ${CONFIG.name} ${DAY.emoji}`;
