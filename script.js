@@ -70,7 +70,7 @@ function getToday(){
 
 const today = getToday();
 
-const DAY = CONFIG.week[today] || CONFIG.week["02-14"];
+const DAY = CONFIG.week[today] || CONFIG.week["02-13"];
 
 
 // Init
@@ -111,14 +111,14 @@ question.innerText = DAY.final;
   noBtn.style.display="none";
 
   // Show GIF only on Valentine Day
-if (today === "02-14") {
+if (today === "02-13") {
   finalGif.hidden = false;
 }
   screenshotText.style.display="block";
 
  startSymbols();
 
-if (today === "02-14") {
+if (today === "02-13") {
   startConfetti();
   startFireworks();
 }
