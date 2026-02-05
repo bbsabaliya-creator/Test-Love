@@ -79,7 +79,8 @@ question.innerHTML = `
   <div>${DAY.title}</div>
   <div style="margin-top:10px;font-size:1.1rem;">
     ${DAY.question}
-  </div>;
+  </div>
+  ;
 yesBtn.innerText = "Continue 💖";
 
 
