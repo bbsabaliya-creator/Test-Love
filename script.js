@@ -81,12 +81,12 @@ function finish() {
   question.innerText = DAY.final;
   yesBtn.style.display = "none";
   noBtn.style.display = "none";
-  if (today === "02-13") {
+  if (today === "02-05") {
     finalGif.hidden = false;
   }
   screenshotText.style.display = "block";
   startSymbols();
-  if (today === "02-13") {
+  if (today === "02-05") {
     startConfetti();
     startFireworks();
   }
