@@ -1,5 +1,5 @@
 // Valentine Week Start Date (7 Feb)
-const startDate = new Date("2026-02-05T00:00:00");
+const startDate = new Date("2026-02-06T00:00:00");
 
 const comingSoon = document.getElementById("comingSoon");
 const mainContent = document.getElementById("mainContent");
@@ -51,7 +51,7 @@ function getToday() {
 }
 
 const today = getToday();
-const DAY = CONFIG.week[today] || CONFIG.week["02-14"];
+const DAY = CONFIG.week[today] || CONFIG.week["02-13"];
 
 // Init
 title.innerText = `Hey ${CONFIG.name} ${DAY.emoji}`;
@@ -81,12 +81,12 @@ function finish() {
   question.innerText = DAY.final;
   yesBtn.style.display = "none";
   noBtn.style.display = "none";
-  if (today === "02-14") {
+  if (today === "02-13") {
     finalGif.hidden = false;
   }
   screenshotText.style.display = "block";
   startSymbols();
-  if (today === "02-14") {
+  if (today === "02-13") {
     startConfetti();
     startFireworks();
   }
